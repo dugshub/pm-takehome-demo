@@ -16,16 +16,20 @@ export class ProjectsService {
     if (search) {
       return this.projectRepository.find({
         where: { name: Like(`%${search}%`) },
+        relations: ['projectManager'],
         order: { createdAt: 'DESC' },
       });
     }
-    return this.projectRepository.find({ order: { createdAt: 'DESC' } });
+    return this.projectRepository.find({
+      relations: ['projectManager'],
+      order: { createdAt: 'DESC' },
+    });
   }
 
   async findOne(id: string): Promise<Project> {
     const project = await this.projectRepository.findOne({
       where: { id },
-      relations: ['deliverables', 'deliverables.projectManager'],
+      relations: ['projectManager', 'deliverables', 'deliverables.projectManager'],
     });
     if (!project) {
       throw new NotFoundException(`Project with ID ${id} not found`);

@@ -62,7 +62,7 @@ async function seed() {
 
   console.log(`Created ${projectManagers.length} project managers`);
 
-  // Create Projects
+  // Create Projects (each owned by a PM)
   const projects = await projectRepo.save([
     {
       name: 'Toronto General Hospital Expansion',
@@ -71,6 +71,7 @@ async function seed() {
       status: ProjectStatus.ACTIVE,
       startDate: new Date('2024-01-15'),
       endDate: new Date('2026-06-30'),
+      projectManagerId: projectManagers[0].id, // Sarah Chen
     },
     {
       name: 'Vancouver Lions Gate Bridge Retrofit',
@@ -79,6 +80,7 @@ async function seed() {
       status: ProjectStatus.ACTIVE,
       startDate: new Date('2024-03-01'),
       endDate: new Date('2025-12-15'),
+      projectManagerId: projectManagers[1].id, // Michael Thompson
     },
     {
       name: 'Calgary Transit LRT Extension',
@@ -87,6 +89,7 @@ async function seed() {
       status: ProjectStatus.ACTIVE,
       startDate: new Date('2023-09-01'),
       endDate: new Date('2027-03-31'),
+      projectManagerId: projectManagers[2].id, // Emily Rodriguez
     },
     {
       name: 'Montreal Water Treatment Facility',
@@ -95,6 +98,7 @@ async function seed() {
       status: ProjectStatus.ON_HOLD,
       startDate: new Date('2024-06-01'),
       endDate: new Date('2026-12-31'),
+      projectManagerId: projectManagers[3].id, // David Kim
     },
     {
       name: 'Ottawa Parliament Restoration',
@@ -103,6 +107,7 @@ async function seed() {
       status: ProjectStatus.COMPLETED,
       startDate: new Date('2022-01-01'),
       endDate: new Date('2024-11-30'),
+      projectManagerId: projectManagers[4].id, // Jennifer Patel
     },
   ]);
 

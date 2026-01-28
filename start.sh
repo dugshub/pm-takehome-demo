@@ -12,6 +12,7 @@ cd "$SCRIPT_DIR"
 # Default ports (less common to avoid conflicts)
 DEFAULT_BACKEND_PORT=4100
 DEFAULT_FRONTEND_PORT=4200
+DB_FILE="$SCRIPT_DIR/database.sqlite"
 
 # Check if a port is in use
 port_in_use() {
@@ -52,7 +53,10 @@ print_summary() {
     printf "║  %-16s  %-33s  %-6s   ║\n" "Backend API" "http://localhost:$BACKEND_PORT/api" "✓ Live"
     echo "║                                                              ║"
     echo "╠══════════════════════════════════════════════════════════════╣"
-    echo "║  Database: $SCRIPT_DIR/database.sqlite"
+    echo "║  Database: $DB_FILE"
+    if [ "$SEEDED" = "true" ]; then
+    echo "║  Status: Seeded with sample data                            ║"
+    fi
     echo "╠══════════════════════════════════════════════════════════════╣"
     echo "║  Press Ctrl+C to stop all servers                           ║"
     echo "╚══════════════════════════════════════════════════════════════╝"
@@ -94,6 +98,18 @@ cd "$SCRIPT_DIR/frontend"
 npm install --silent
 
 echo ""
+
+# Seed database if it doesn't exist
+SEEDED="false"
+if [ ! -f "$DB_FILE" ]; then
+    echo "Database not found. Seeding with sample data..."
+    cd "$SCRIPT_DIR/backend"
+    npm run seed --silent
+    SEEDED="true"
+    echo "Database seeded successfully!"
+    echo ""
+fi
+
 echo "Starting servers..."
 echo ""
 

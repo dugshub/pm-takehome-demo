@@ -4,6 +4,7 @@ import {
   IsOptional,
   IsEnum,
   IsDateString,
+  IsUUID,
 } from 'class-validator';
 import { ProjectStatus } from '../project.entity';
 
@@ -27,4 +28,8 @@ export class CreateProjectDto {
   @IsDateString()
   @IsOptional()
   endDate?: string;
+
+  @IsUUID()
+  @IsNotEmpty()
+  projectManagerId: string;
 }
