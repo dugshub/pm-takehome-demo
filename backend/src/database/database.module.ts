@@ -26,7 +26,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         // Default to SQLite
         return {
           type: 'sqlite',
-          database: configService.get<string>('DB_DATABASE', 'data/database.sqlite'),
+          database: configService.get<string>('DB_DATABASE', '../database.sqlite'),
           autoLoadEntities: true,
           synchronize: configService.get<boolean>('DB_SYNCHRONIZE', true),
         };

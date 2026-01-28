@@ -20,6 +20,9 @@ Full-stack application for tracking infrastructure project deliverables, deadlin
 ## Development Commands
 
 ```bash
+# Quick Start (installs deps and launches both servers)
+./start.sh
+
 # Backend
 cd backend && npm run start:dev   # Start dev server
 cd backend && npm run seed        # Seed database
@@ -55,5 +58,5 @@ Project (1) ──< (N) Deliverable (N) >── (1) ProjectManager
 - CORS enabled for localhost:5173
 
 ## Database
-- Dev: SQLite at `backend/data/database.sqlite`
+- Dev: SQLite at `database.sqlite` (project root)
 - Prod: Set `DB_TYPE=postgres` + connection env vars

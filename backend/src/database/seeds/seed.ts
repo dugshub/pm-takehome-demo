@@ -8,7 +8,7 @@ import {
 
 const dataSource = new DataSource({
   type: 'sqlite',
-  database: 'data/database.sqlite',
+  database: '../database.sqlite',
   entities: [Project, ProjectManager, Deliverable],
   synchronize: true,
 });
