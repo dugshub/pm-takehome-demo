@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/layout';
-import { Button, Card, SearchInput, Table, StatusBadge, Modal, Input, Select, DatePicker, PageLoader } from '../components/ui';
-import { useProjects, useCreateProject } from '../hooks';
+import { Button, Card, SearchInput, Table, StatusBadge, Modal, Input, Select, DatePicker, PageLoader, Avatar } from '../components/ui';
+import { useProjects, useCreateProject, useProjectManagers } from '../hooks';
 import type { Project, CreateProjectInput, ProjectStatus } from '../types';
 
 const statusOptions = [
@@ -21,9 +21,11 @@ export const ProjectsPage: React.FC = () => {
     status: 'active',
     startDate: '',
     endDate: '',
+    projectManagerId: '',
   });
 
   const { data: projects = [], isLoading } = useProjects();
+  const { data: projectManagers = [] } = useProjectManagers();
   const createProject = useCreateProject();
 
   const filteredProjects = useMemo(() => {
@@ -52,6 +54,7 @@ export const ProjectsPage: React.FC = () => {
         status: 'active',
         startDate: '',
         endDate: '',
+        projectManagerId: '',
       });
     } catch (error) {
       console.error('Failed to create project:', error);
@@ -61,14 +64,16 @@ export const ProjectsPage: React.FC = () => {
   const columns = [
     { key: 'name', header: 'Project Name', sortable: true },
     {
-      key: 'description',
-      header: 'Description',
+      key: 'projectManager',
+      header: 'Owner',
       render: (project: Project) =>
-        project.description
-          ? project.description.length > 50
-            ? `${project.description.substring(0, 50)}...`
-            : project.description
-          : '-',
+        project.projectManager ? (
+          <Avatar
+            firstName={project.projectManager.firstName}
+            lastName={project.projectManager.lastName}
+            size="sm"
+          />
+        ) : '-',
     },
     {
       key: 'status',
@@ -160,6 +165,18 @@ export const ProjectsPage: React.FC = () => {
               placeholder="Enter project description"
             />
           </div>
+
+          <Select
+            label="Project Owner"
+            options={projectManagers.map((pm) => ({
+              value: pm.id,
+              label: `${pm.firstName} ${pm.lastName}`,
+            }))}
+            value={formData.projectManagerId}
+            onChange={(e) => setFormData({ ...formData, projectManagerId: e.target.value })}
+            placeholder="Select project owner"
+            required
+          />
 
           <Select
             label="Status"

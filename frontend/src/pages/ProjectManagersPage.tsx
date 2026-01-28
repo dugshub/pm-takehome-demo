@@ -8,6 +8,7 @@ import {
   Modal,
   Input,
   PageLoader,
+  UserBadge,
 } from '../components/ui';
 import {
   useProjectManagers,
@@ -56,14 +57,15 @@ export const ProjectManagersPage: React.FC = () => {
       key: 'name',
       header: 'Name',
       sortable: true,
-      render: (pm: ProjectManager) => `${pm.firstName} ${pm.lastName}`,
+      render: (pm: ProjectManager) => (
+        <UserBadge
+          firstName={pm.firstName}
+          lastName={pm.lastName}
+          department={pm.department}
+        />
+      ),
     },
     { key: 'email', header: 'Email', sortable: true },
-    {
-      key: 'department',
-      header: 'Department',
-      render: (pm: ProjectManager) => pm.department || '-',
-    },
     {
       key: 'createdAt',
       header: 'Added',

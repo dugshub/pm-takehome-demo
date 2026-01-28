@@ -8,6 +8,8 @@ export interface Project {
   status: ProjectStatus;
   startDate?: string;
   endDate?: string;
+  projectManagerId: string;
+  projectManager?: ProjectManager;
   createdAt: string;
   updatedAt: string;
   deliverables?: Deliverable[];
@@ -43,6 +45,7 @@ export interface CreateProjectInput {
   status?: ProjectStatus;
   startDate?: string;
   endDate?: string;
+  projectManagerId: string;
 }
 
 export interface UpdateProjectInput extends Partial<CreateProjectInput> {}

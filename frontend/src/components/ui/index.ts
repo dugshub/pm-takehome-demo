@@ -8,3 +8,4 @@ export { Modal } from './Modal';
 export { Badge, StatusBadge, getDeliverableStatusVariant, getProjectStatusVariant } from './Badge';
 export { SearchInput } from './SearchInput';
 export { LoadingSpinner, PageLoader } from './LoadingSpinner';
+export { Avatar, UserBadge } from './Avatar';

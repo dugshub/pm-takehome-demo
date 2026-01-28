@@ -11,6 +11,7 @@ import {
   Select,
   DatePicker,
   PageLoader,
+  Avatar,
 } from '../components/ui';
 import {
   useProject,
@@ -149,7 +150,13 @@ export const ProjectDetailPage: React.FC = () => {
       key: 'projectManager',
       header: 'Project Manager',
       render: (d: Deliverable) =>
-        d.projectManager ? `${d.projectManager.firstName} ${d.projectManager.lastName}` : '-',
+        d.projectManager ? (
+          <Avatar
+            firstName={d.projectManager.firstName}
+            lastName={d.projectManager.lastName}
+            size="sm"
+          />
+        ) : '-',
     },
   ];
 

@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/layout';
-import { Card, SearchInput, Table, StatusBadge, PageLoader } from '../components/ui';
+import { Card, SearchInput, Table, StatusBadge, PageLoader, Avatar } from '../components/ui';
 import { useProjects, useDeliverables, useUpcomingDeliverables } from '../hooks';
 import type { Project, Deliverable } from '../types';
 
@@ -40,16 +40,21 @@ export const DashboardPage: React.FC = () => {
   const projectColumns = [
     { key: 'name', header: 'Project Name', sortable: true },
     {
+      key: 'projectManager',
+      header: 'Owner',
+      render: (project: Project) =>
+        project.projectManager ? (
+          <Avatar
+            firstName={project.projectManager.firstName}
+            lastName={project.projectManager.lastName}
+            size="sm"
+          />
+        ) : '-',
+    },
+    {
       key: 'status',
       header: 'Status',
       render: (project: Project) => <StatusBadge status={project.status} type="project" />,
-    },
-    {
-      key: 'startDate',
-      header: 'Start Date',
-      sortable: true,
-      render: (project: Project) =>
-        project.startDate ? new Date(project.startDate).toLocaleDateString() : '-',
     },
   ];
 
