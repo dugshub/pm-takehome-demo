@@ -1,0 +1,6 @@
+{
+  "project": {
+    "name": "AIIG Deliverable Management System",
+    "description": "Full-stack NestJS + React application for tracking project deliverables"
+  }
+}
