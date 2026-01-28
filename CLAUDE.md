@@ -7,13 +7,13 @@ Full-stack application for tracking infrastructure project deliverables, deadlin
 
 ### Backend (NestJS)
 - Location: `/backend`
-- Port: 3000
+- Port: 4100 (default, auto-offsets if in use)
 - Database: SQLite (TypeORM, Postgres-ready)
 - Modules: projects, deliverables, project-managers
 
 ### Frontend (React + Vite)
 - Location: `/frontend`
-- Port: 5173
+- Port: 4200 (default, auto-offsets if in use)
 - State: TanStack Query
 - Styling: Tailwind CSS
 
@@ -54,8 +54,8 @@ Project (1) ──< (N) Deliverable (N) >── (1) ProjectManager
 - `src/components/ui/*.tsx` - Reusable UI components
 
 ## API Base URL
-- Development: http://localhost:3000/api
-- CORS enabled for localhost:5173
+- Development: http://localhost:4100/api (default)
+- CORS dynamically enabled for frontend port
 
 ## Database
 - Dev: SQLite at `database.sqlite` (project root)

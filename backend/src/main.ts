@@ -5,9 +5,15 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Enable CORS for frontend
+  const port = process.env.PORT || 4100;
+  const frontendPort = process.env.FRONTEND_PORT || 4200;
+
+  // Enable CORS for frontend (dynamic port support)
   app.enableCors({
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: [
+      `http://localhost:${frontendPort}`,
+      `http://127.0.0.1:${frontendPort}`,
+    ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
@@ -21,7 +27,6 @@ async function bootstrap() {
     }),
   );
 
-  const port = process.env.PORT || 3000;
   await app.listen(port);
   console.log(`Application is running on: http://localhost:${port}`);
 }
